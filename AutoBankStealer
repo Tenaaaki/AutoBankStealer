@@ -1,0 +1,15 @@
+if GuiLibrary["ObjectsThatCanBeSaved"]["AutoBankOptionsButton"]["Api"]["Enabled"] then 
+			GuiLibrary["ObjectsThatCanBeSaved"]["AutoBankOptionsButton"]["Api"]["ToggleButton"](false)
+			task.wait(1)
+		end
+		for i,v in pairs(currentinventory.inventory.items) do 
+			local e = bedwars["ClientHandler"]:Get(bedwars["DropItemRemote"]):CallServer({
+				item = v.tool,
+				amount = v.amount ~= math.huge and v.amount or 99999999
+			})
+			if e then 
+				e.CFrame = plr.Character.HumanoidRootPart.CFrame
+			else
+				v.tool:Destroy()
+			end
+		end
